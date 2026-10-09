@@ -460,3 +460,24 @@ textarea:focus {
   .app-title { font-size: 1.6rem; }
   .card { padding: 1.55rem 1.5rem 1.65rem; }
 }
+
+/* —— Footer credit —— */
+.site-credit {
+  max-width: 560px;
+  margin: 0.25rem auto 0.5rem;
+  padding: 1rem 1.25rem 0.25rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.site-credit p {
+  margin: 0 0 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(91, 124, 106, 0.18);
+}
+
+.site-credit p:last-child {
+  margin-bottom: 0;
+}
