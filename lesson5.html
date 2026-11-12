@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261112c" />
+  <link rel="stylesheet" href="styles.css?v=20261112d" />
 </head>
 <body data-prefix="zuomiao5:">
   <header class="app-header">
@@ -23,6 +23,7 @@
   </header>
 
   <nav class="nav-chips" aria-label="快速導覽">
+    <a href="#icebreaker">破冰</a>
     <a href="#reflect">自省</a>
     <a href="#song">詩歌</a>
     <a href="#teach">經文</a>
@@ -33,9 +34,26 @@
   </nav>
 
   <main>
-    <!-- ① 開場自省 -->
+    <!-- ① 破冰 -->
+    <section class="card" id="icebreaker">
+      <div class="section-label">① 破冰</div>
+      <h2 class="section-title">心情與微笑</h2>
+      <p class="section-intro">先輕鬆開口就好，不必深入。可先二人一組說，再請兩三位在大組講一句。</p>
+      <h3 class="q-heading">先：今天的心情</h3>
+      <p class="section-body">用一個詞（或一種天氣），形容你今天來到小組的心情，再講半句原因。</p>
+      <label class="field-label" for="ice-mood">我的詞</label>
+      <input id="ice-mood" class="short-input" data-key="ice-mood" type="text" placeholder="例如：晴朗、趕、安靜……" />
+      <label class="field-label" for="ice-mood-why">半句原因（可選）</label>
+      <textarea id="ice-mood-why" data-key="ice-mood-why" rows="2" placeholder="因為……"></textarea>
+      <h3 class="q-heading">再：這個星期令你微笑的一件小事</h3>
+      <p class="section-body">用大約半分鐘，分享一件令你微笑的小事就可以。</p>
+      <label class="field-label" for="ice-smile">筆記（可選）</label>
+      <textarea id="ice-smile" data-key="ice-smile" rows="3" placeholder="想記下的那件小事……"></textarea>
+    </section>
+
+    <!-- ② 開場自省 -->
     <section class="card" id="reflect">
-      <div class="section-label">① 開場自省</div>
+      <div class="section-label">② 開場自省</div>
       <h2 class="section-title">看看自己的習慣</h2>
       <p class="section-intro">這些問題不是要證明甚麼，也沒有標準答案，只是幫我們誠實看看自己習慣怎樣與人相處。</p>
 
@@ -69,9 +87,9 @@
       <textarea id="reflect-notes" data-key="reflect-notes" rows="3" placeholder="可寫下其他原因，或一句自我觀察……"></textarea>
     </section>
 
-    <!-- ② 詩歌 -->
+    <!-- ③ 詩歌 -->
     <section class="card" id="song">
-      <div class="section-label">② 詩歌敬拜</div>
+      <div class="section-label">③ 詩歌敬拜</div>
       <h2 class="section-title">《我們愛（讓世界不一樣）》</h2>
       <p class="song-lead">主內交通，是先被主的愛吸引，才有力去愛身邊的人。唱的時候，可以對主說：「祢先愛我；求祢也教我去愛。」</p>
       <div class="lyrics">
@@ -90,9 +108,9 @@
       <p class="song-credit">（詞、曲：游智婷）</p>
     </section>
 
-    <!-- ③ 經文 -->
+    <!-- ④ 經文 -->
     <section class="card" id="teach">
-      <div class="section-label">③ 課文與經文學習</div>
+      <div class="section-label">④ 課文與經文學習</div>
       <h2 class="section-title">主內交通</h2>
       <div class="section-intro">
         交通不是普通交際，而是基督徒在靈裡彼此來往：快樂時分享，困難時分擔；彼此激勵，也彼此關懷。我們能夠這樣交通，是因為神已經做成了三件事。
@@ -142,9 +160,9 @@
       </div>
     </section>
 
-    <!-- ④ 討論 -->
+    <!-- ⑤ 討論 -->
     <section class="card" id="discuss">
-      <div class="section-label">④ 討論</div>
+      <div class="section-label">⑤ 討論</div>
       <h2 class="section-title">連到生活</h2>
       <p class="section-intro">可選其中兩題分享。不想說細節的，只說一句方向也可以。</p>
       <ol class="share-list">
@@ -156,9 +174,9 @@
       <textarea id="discuss-notes" data-key="discuss-notes" rows="5" placeholder="記下你的回應……"></textarea>
     </section>
 
-    <!-- ⑤ 習作 -->
+    <!-- ⑥ 習作 -->
     <section class="card" id="practice">
-      <div class="section-label">⑤ 習作</div>
+      <div class="section-label">⑥ 習作</div>
       <h2 class="section-title">彼此相愛</h2>
 
       <h3 class="q-heading">習作①　背誦約翰福音 13:34</h3>
@@ -190,9 +208,9 @@
       <textarea id="practice-notes" data-key="practice-notes" rows="4" placeholder="寫下特別觸動你的一兩句……"></textarea>
     </section>
 
-    <!-- ⑥ 本週小步 -->
+    <!-- ⑦ 本週小步 -->
     <section class="card" id="step">
-      <div class="section-label">⑥ 本週交通小步</div>
+      <div class="section-label">⑦ 本週交通小步</div>
       <h2 class="section-title">跨出一小步</h2>
       <p class="section-body">寫下今晚一樣觸動你的經文或一句話，以及一個具體、做得到的小步。例如：</p>
       <ul class="plain-list">
@@ -208,9 +226,9 @@
       <div class="close-line">我們能夠交通，是因為神先賜生命、合一和一個家；我們學習交通，是用愛心說誠實話，彼此分擔、彼此建立。</div>
     </section>
 
-    <!-- ⑦ 代禱 -->
+    <!-- ⑧ 代禱 -->
     <section class="card" id="prayer">
-      <div class="section-label">⑦ 彼此代禱</div>
+      <div class="section-label">⑧ 彼此代禱</div>
       <h2 class="section-title">彼此代禱</h2>
       <p class="section-body">可二人一組，為對方的「本週交通小步」禱告一句。分享內容留在小組裡就可以。</p>
       <textarea data-key="prayer-notes" rows="4" placeholder="代禱筆記……"></textarea>
