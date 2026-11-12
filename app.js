@@ -1,14 +1,26 @@
-/* 《茁苗》第四課｜職青姊妹小組 — 答案只存本裝置 localStorage（前綴 zuomiao4:） */
+/* 《茁苗》職青姊妹小組 — 答案只存本裝置 localStorage（各課用 data-prefix 分開） */
 (function () {
   "use strict";
 
-  var PREFIX = "zuomiao4:";
+  var PREFIX = (document.body && document.body.getAttribute("data-prefix")) || "zuomiao4:";
   var STORAGE_KEY = PREFIX + "answers";
 
   function $(id) { return document.getElementById(id); }
 
   function fieldEls() {
     return Array.prototype.slice.call(document.querySelectorAll("[data-key]"));
+  }
+
+  function uniqueFields() {
+    var seen = {};
+    return fieldEls().filter(function (el) {
+      var key = el.getAttribute("data-key");
+      if (el.type === "radio") {
+        if (seen[key]) return false;
+        seen[key] = true;
+      }
+      return true;
+    });
   }
 
   function showToast(msg) {
@@ -22,14 +34,40 @@
     }, 2200);
   }
 
+  function setFieldValue(el, value) {
+    if (el.type === "checkbox") {
+      el.checked = value === true || value === "1" || value === "true";
+    } else if (el.type === "radio") {
+      var group = document.querySelectorAll("[data-key=\"" + el.getAttribute("data-key") + "\"]");
+      Array.prototype.forEach.call(group, function (r) {
+        r.checked = r.value === value;
+      });
+    } else if (typeof value === "string") {
+      el.value = value;
+    }
+  }
+
+  function getFieldValue(el) {
+    if (el.type === "checkbox") {
+      return el.checked ? "1" : "";
+    }
+    if (el.type === "radio") {
+      var checked = document.querySelector("[data-key=\"" + el.getAttribute("data-key") + "\"]:checked");
+      return checked ? checked.value : "";
+    }
+    return el.value;
+  }
+
   function loadAnswers() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       var data = JSON.parse(raw);
-      fieldEls().forEach(function (el) {
+      uniqueFields().forEach(function (el) {
         var key = el.getAttribute("data-key");
-        if (typeof data[key] === "string") el.value = data[key];
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          setFieldValue(el, data[key]);
+        }
       });
     } catch (e) {
       console.warn("loadAnswers failed", e);
@@ -38,8 +76,8 @@
 
   function collectAnswers() {
     var data = { savedAt: new Date().toISOString() };
-    fieldEls().forEach(function (el) {
-      data[el.getAttribute("data-key")] = el.value;
+    uniqueFields().forEach(function (el) {
+      data[el.getAttribute("data-key")] = getFieldValue(el);
     });
     return data;
   }
@@ -62,7 +100,10 @@
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch (e) { /* ignore */ }
-    fieldEls().forEach(function (el) { el.value = ""; });
+    fieldEls().forEach(function (el) {
+      if (el.type === "checkbox" || el.type === "radio") el.checked = false;
+      else el.value = "";
+    });
     showToast("已清除");
   }
 
@@ -76,9 +117,7 @@
   }
 
   var autoSave = debounce(function () {
-    if (persist()) {
-      /* silent autosave — no toast spam */
-    }
+    persist();
   }, 600);
 
   function bind() {
@@ -92,8 +131,8 @@
       el.addEventListener("change", autoSave);
     });
 
-    /* Highlight active nav chip while scrolling */
     var chips = Array.prototype.slice.call(document.querySelectorAll(".nav-chips a"));
+    if (!chips.length) return;
     var sections = chips.map(function (a) {
       return document.querySelector(a.getAttribute("href"));
     }).filter(Boolean);
